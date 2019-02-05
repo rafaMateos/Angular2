@@ -1,0 +1,168 @@
+<html>
+<body>
+<div class="div-home">
+
+    <div class="headercontainer">
+
+      <div class="buttoncontainer">
+        <button class="newbutton" (click) = "Open(content)">NEW</button>
+      </div>
+            
+      <p class="pagename">ORDERS DETAILS</p>
+          
+      <div class="searchcontainer">
+        <button class="newbutton" class="send">SEND</button>
+      </div>
+      
+    </div>
+
+    <hr>
+
+  <div class="orderInfo">
+ <div class="peopleData">
+        <ul>
+            <p>Customer : {{Data.nombreCliente}}</p>
+        </ul>
+
+
+        <ul>
+            <p>Supplier : {{Data.nombreVendedor}}</p>
+        </ul>
+    </div>
+ 
+    <div class ="datesData">
+        <ul>
+            <p>Order date : {{Data.fechaPedido | date: 'dd/MM/yyyy'}}</p>
+        </ul>
+        <ul>
+            <p (click)="CambiarFecha(Data.fechaEntrega)">Dispatch Date : {{Data.fechaEntrega | date: 'dd/MM/yyyy'}}</p>
+            <div id="fecha" hidden>
+
+              <ul> 
+
+                  <input id="fechaSelect" value ="2019-01-01" type="date" name="bday">
+                  <input id="horaSelect" value="00:00" type="time" name="tday">
+                  
+                  <button (click) ="helow()"> Editar </button>
+              </ul>
+
+
+          </div>
+        </ul>
+    </div> 
+  </div>
+
+    <div class="tablecontainer">
+    <table cdk-table [dataSource]="miLineasDePedido" class="linestable">
+
+      <tr cdk-header-row *cdkHeaderRowDef="columns"></tr>
+      <tr cdk-row *cdkRowDef="let row; columns: columns"></tr>
+      <!-- nombre Column -->
+      <ng-container cdkColumnDef="nombre">
+        <th cdk-header-cell *cdkHeaderCellDef>Name</th>
+        <td cdk-cell *cdkCellDef="let row"> {{row.producto.nombre}} </td>
+      </ng-container>
+    
+      <!-- precioVenta Column -->
+      <ng-container cdkColumnDef="descripcion">
+        <th cdk-header-cell *cdkHeaderCellDef>Description</th>
+        <td cdk-cell *cdkCellDef="let row">{{row.producto.descripcion}} </td>
+      </ng-container>
+    
+      <!-- descripcion Column -->
+      <ng-container cdkColumnDef="listaCategorias">
+        <th cdk-header-cell *cdkHeaderCellDef>Category</th>
+        <td cdk-cell *cdkCellDef="let row"> {{row.producto.listaCategorias[0].nombre}} </td>
+      </ng-container>
+    
+      <!-- stock Column -->
+      <ng-container cdkColumnDef="cantidad">
+        <th cdk-header-cell *cdkHeaderCellDef>Units</th>
+        <td cdk-cell *cdkCellDef="let row"> {{row.cantidad}} </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="precioUnitario">
+        <th cdk-header-cell *cdkHeaderCellDef>Unit price</th>
+        <td cdk-cell *cdkCellDef="let row"> {{row.precioUnitario}} </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="impuestos">
+        <th cdk-header-cell *cdkHeaderCellDef>Taxes</th>
+        <td cdk-cell *cdkCellDef="let row"> {{row.impuestos}} </td>
+      </ng-container>
+    
+      <ng-container cdkColumnDef="subtotal">
+        <th cdk-header-cell *cdkHeaderCellDef>Subtotal</th>
+        <td cdk-cell *cdkCellDef="let row"> {{row.subtotal}} </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="Acciones">
+        <th cdk-header-cell *cdkHeaderCellDef>Options</th>
+        <td cdk-cell *cdkCellDef="let row">
+          <i value="Borrar" (click)="Borrar(row.idPedido)" class="material-icons">delete</i>
+          <i value="Editar"  (click)="Editar(row.idProducto)" class="material-icons">edit</i>
+        </td>
+      </ng-container>
+
+    </table>
+  </div>
+
+
+  <div id="NewProduct" hidden>
+
+    <div style="margin-top: 15px" id="NuevaLineaPedido">
+  
+  <label> Escoja un producto:</label>
+      <mat-form-field>
+        <select matNativeControl (change)="ProductoSeleccionado($event.target.value)">
+          <option *ngFor="let p of ArrayDeProductos" value="{{p.id}}">
+            {{p.nombre}}
+          </option>
+        </select>
+      </mat-form-field><br>
+    </div>
+  
+  
+  
+    <label> Descripcion:</label>
+    <input id="descrip" type="text"/><br>
+    <label> Lista de categorias: </label>
+    <input id="categories" type="text"/><br>
+    <label> Cantidad: </label>
+    <input id="cantidad" (focusout) = "CalcularCantidad()" type="text"/>
+    <label>Stock disponible:</label>
+    <label id="stockdispo"></label><br>
+    <label> Precio Unitario: </label>
+    <input id="precio" (focusout) = "CalcularCantidad()" type="text"/><br>
+    <label> impuestos: </label>
+    <input id="impuestos" type="text" value="0.21"/><br>
+    <label> Subtotal: </label>
+    <p>{{SubTotal}}</p><br>
+  
+  
+    <button (click) = "save()"> SAVE </button>
+  
+  </div>
+  
+  
+
+  <hr>
+  <div class="total">
+    <p>TOTAL: {{totalprice}}</p>
+  </div>
+
+
+
+</div>
+
+
+
+
+</body>
+</html>        
+   
+         
+
+
+    
+

@@ -90,6 +90,8 @@ export class OrderDetailsComponent implements OnInit {
 
   public Open(){
 
+
+
     this.miOrderService.getInfoLineas(this.id).subscribe(result =>{
       this.miLineasDePedido2 = JSON.stringify(result)
       this.miLineasDePedido3 = JSON.parse(this.miLineasDePedido2);
@@ -113,6 +115,15 @@ export class OrderDetailsComponent implements OnInit {
        }
 
   })
+
+  if(this.miLineasDePedido3.length == 0){
+
+    for(var i = 0; i< this.Temporal.length; i++){
+      this.ArrayDeProductos.push(this.Temporal[i]);
+    }
+
+  }
+
 
 
      var fecha = new Date();

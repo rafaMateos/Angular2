@@ -5,7 +5,7 @@
     <div class="headercontainer">
 
       <div class="buttoncontainer">
-        <button class="newbutton" (click) = "Open(content)">NEW</button>
+        <button class="newbutton" (click) = "Open()">NEW</button>
       </div>
             
       <p class="pagename">ORDERS DETAILS</p>
@@ -99,7 +99,7 @@
       <ng-container cdkColumnDef="Acciones">
         <th cdk-header-cell *cdkHeaderCellDef>Options</th>
         <td cdk-cell *cdkCellDef="let row">
-          <i value="Borrar" (click)="Borrar(row.idPedido)" class="material-icons">delete</i>
+          <i value="Borrar" (click)="Borrar(row.idProducto)" class="material-icons">delete</i>
           <i value="Editar"  (click)="Editar(row.idProducto)" class="material-icons">edit</i>
         </td>
       </ng-container>
@@ -115,6 +115,7 @@
   <label> Escoja un producto:</label>
       <mat-form-field>
         <select matNativeControl (change)="ProductoSeleccionado($event.target.value)">
+          <option selected>--none--</option>
           <option *ngFor="let p of ArrayDeProductos" value="{{p.id}}">
             {{p.nombre}}
           </option>

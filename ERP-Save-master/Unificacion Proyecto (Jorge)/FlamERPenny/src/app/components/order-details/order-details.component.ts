@@ -226,11 +226,18 @@ export class OrderDetailsComponent implements OnInit {
 
     else{
 
+      (<HTMLSelectElement>document.getElementById("select")).selectedIndex = 0;
+
       document.getElementById('NewProduct').setAttribute('hidden','hidden');
 
       console.log(JSON.stringify(this.LineaPedido))
   
+      
+
       this.addProducto(this.LineaPedido)
+
+      
+      
       this.limpiar();
   
     }
@@ -251,6 +258,7 @@ export class OrderDetailsComponent implements OnInit {
 
     document.getElementById('stockdispo').innerText = "";
 
+  
     this.SubTotal = 0;
 
 

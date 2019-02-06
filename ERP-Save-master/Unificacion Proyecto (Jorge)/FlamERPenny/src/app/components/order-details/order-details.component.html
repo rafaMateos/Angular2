@@ -112,8 +112,8 @@
   
   <label> Escoja un producto:</label>
       <mat-form-field>
-        <select matNativeControl (change)="ProductoSeleccionado($event.target.value)">
-          <option selected>--none--</option>
+        <select id="select" matNativeControl (change)="ProductoSeleccionado($event.target.value)">
+          <option value="0" selected>--none--</option>
           <option *ngFor="let p of ArrayDeProductos" value="{{p.id}}">
             {{p.nombre}}
           </option>

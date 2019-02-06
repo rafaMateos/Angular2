@@ -231,8 +231,28 @@ export class OrderDetailsComponent implements OnInit {
       console.log(JSON.stringify(this.LineaPedido))
   
       this.addProducto(this.LineaPedido)
+      this.limpiar();
   
     }
+
+  }
+
+  limpiar(){
+
+    document.getElementById('descrip').setAttribute('value',"");
+    
+
+    document.getElementById('categories').setAttribute('value',"");
+   
+
+    (<HTMLInputElement>document.getElementById("cantidad")).value = "";
+
+    document.getElementById('precio').setAttribute('value',"");
+
+    document.getElementById('stockdispo').innerText = "";
+
+    this.SubTotal = 0;
+
 
   }
   
@@ -306,7 +326,7 @@ export class OrderDetailsComponent implements OnInit {
     this.LineaPedido.precioUnitario = preciounit;
 
     this.LineaPedido.cantidad = cantidad;
-    this.LineaPedido.impuestos = 0.21;
+    this.LineaPedido.impuestos = 1.21;
     this.LineaPedido.subtotal =  this.SubTotalEdit;
 
     if((this.p.stock + this.CantidadCompare) - (this.LineaPedido.cantidad)  < 0 || this.LineaPedido.cantidad >(this.p.stock + this.CantidadCompare)){

@@ -11,7 +11,7 @@
       <p class="pagename">ORDERS DETAILS</p>
           
       <div class="searchcontainer">
-        <button class="newbutton" class="send">SEND</button>
+        <button class="newbutton" (click) = "helow()" class="send">SEND</button>
       </div>
       
     </div>
@@ -36,18 +36,7 @@
         </ul>
         <ul>
             <p (click)="CambiarFecha(Data.fechaEntrega)">Dispatch Date : {{Data.fechaEntrega | date: 'dd/MM/yyyy'}}</p>
-            <div id="fecha" hidden>
-
-              <ul> 
-
-                  <input id="fechaSelect" value ="2019-01-01" type="date" name="bday">
-                  <input id="horaSelect" value="00:00" type="time" name="tday">
-                  
-                  <button (click) ="helow()"> Editar </button>
-              </ul>
-
-
-          </div>
+           
         </ul>
     </div> 
   </div>

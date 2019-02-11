@@ -176,6 +176,12 @@ export class OrderDetailsComponent implements OnInit {
   
   }
 
+  public enviarFecha(){
+
+
+
+  }
+
 
   public Borrar(id){
 
@@ -423,39 +429,34 @@ export class OrderDetailsComponent implements OnInit {
 
   helow(){
 
-    var fecha : string = (<HTMLInputElement>document.getElementById("fechaSelect")).value.toString();
-    var horaSelect : string = (<HTMLInputElement>document.getElementById("horaSelect")).value.toString();
-    var fechaConHora = fecha.concat('T'+horaSelect +':00')
-   
-    var fechaCompare = new Date(fechaConHora);
-    var FechaActual = new Date();
-    var FechaPedido = new Date(this.Data.fechaPedido.toString());
+    var fecha = new Date();
+ 
+    var result: string =  fecha.getUTCFullYear() + "-" + "02" + "-" +fecha.getUTCDate() + "T" + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+
+    
+    var Fecha = new Date();
+    Fecha = this.Data.fechaEntrega
+
+    let fechaNull = new Date(Fecha);
+    let year = fechaNull.getFullYear();
+
+    if(year == 1){
+
+      this.actuFecha.fechaEntrega = result;
+      this.actuFecha.fechaPedido = this.Data.fechaPedido;
+      this.actuFecha.id = this.Data.id;
+      this.actuFecha.idCliente = this.Data.idCliente;
+      this.actuFecha.nombreVendedor = this.Data.nombreVendedor;
+      this.actuFecha.totalPedido = this.Data.totalPedido;
   
-    alert(fechaConHora)
-  
-    this.actuFecha.fechaEntrega = fechaConHora;
-    this.actuFecha.fechaPedido = this.Data.fechaPedido;
-    this.actuFecha.id = this.Data.id;
-    this.actuFecha.idCliente = this.Data.idCliente;
-    this.actuFecha.nombreVendedor = this.Data.nombreVendedor;
-    this.actuFecha.totalPedido = this.Data.totalPedido;
-
-    console.log(this.actuFecha.fechaEntrega)
-
-    if(fechaCompare < FechaPedido){
-
-      alert('La fecha de entrega no puede ser menor a la de realizacion')
-
-    }else if(fechaCompare > FechaActual){
-
-      alert('La fecha de entrega no puede ser mayor a la actual')
-
+    
+        this.ActuFecha(this.actuFecha)
+        
     }else{
 
-      this.ActuFecha(this.actuFecha)
-      document.getElementById('fecha').setAttribute('hidden','hidden');
-
+      alert('El pedido ya fue entregado');
     }
+   
 
     //var json = JSON.stringify(this.actuFecha);
   
